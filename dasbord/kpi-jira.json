@@ -1,0 +1,918 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": 11672,
+    "graphTooltip": 1,
+    "id": 5,
+    "iteration": 1643134225302,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 56,
+        "panels": [],
+        "title": "NSK",
+        "type": "row"
+      },
+      {
+        "columns": [],
+        "datasource": "Prometheus",
+        "description": "",
+        "fontSize": "90%",
+        "gridPos": {
+          "h": 17,
+          "w": 23,
+          "x": 0,
+          "y": 1
+        },
+        "id": 44,
+        "links": [],
+        "pageSize": null,
+        "scroll": true,
+        "showHeader": true,
+        "sort": {
+          "col": null,
+          "desc": false
+        },
+        "styles": [
+          {
+            "$$hashKey": "object:36",
+            "alias": "",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "__name__",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:37",
+            "alias": "число решенных вовремя\t",
+            "align": "",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "link": true,
+            "mappingType": 1,
+            "pattern": "Value #A",
+            "preserveFormat": false,
+            "sanitize": false,
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:38",
+            "alias": "общее число\t",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #B",
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:39",
+            "alias": "Limit memory",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #C",
+            "thresholds": [],
+            "type": "number",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:40",
+            "alias": "",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Time",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          }
+        ],
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "tasks_completed_on_time{Zone=\"НСК\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_total{Zone=\"НСК\"}",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "B"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "НСК-KPI-Jira",
+        "transform": "table",
+        "transformations": [
+          {
+            "id": "concatenate",
+            "options": {}
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Month 1": false,
+                "Month 2": true,
+                "Priority 2": true,
+                "Zone 2": true,
+                "instance 1": true,
+                "instance 2": true,
+                "job 1": true,
+                "job 2": true
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "процент нарушений",
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Value #A",
+                  "Value #B"
+                ],
+                "reducer": "diffperc"
+              },
+              "replaceFields": false
+            }
+          }
+        ],
+        "type": "table-old"
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 18
+        },
+        "id": 54,
+        "panels": [],
+        "title": "CableOperators+ IPOperators",
+        "type": "row"
+      },
+      {
+        "columns": [],
+        "datasource": "Prometheus",
+        "description": "",
+        "fontSize": "90%",
+        "gridPos": {
+          "h": 23,
+          "w": 23,
+          "x": 0,
+          "y": 19
+        },
+        "id": 46,
+        "links": [],
+        "pageSize": null,
+        "scroll": true,
+        "showHeader": true,
+        "sort": {
+          "col": 1,
+          "desc": false
+        },
+        "styles": [
+          {
+            "$$hashKey": "object:36",
+            "alias": "",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "__name__",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:37",
+            "alias": "число решенных вовремя ( CableOperators)\t",
+            "align": "",
+            "colorMode": "cell",
+            "colors": [
+              "#96D98D",
+              "rgba(237, 129, 40, 0.89)",
+              "#96D98D"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "link": false,
+            "mappingType": 1,
+            "pattern": "Value #A",
+            "preserveFormat": false,
+            "sanitize": false,
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:38",
+            "alias": "общее числo ( CableOperators)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#96D98D",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #B",
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:39",
+            "alias": "число решенных вовремя ( IPOperators)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#8AB8FF",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #C",
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:40",
+            "alias": "",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Time",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:3872",
+            "alias": "общее число (IPOperators)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#8AB8FF",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #D",
+            "thresholds": [],
+            "type": "string",
+            "unit": "short"
+          }
+        ],
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "tasks_completed_on_time{Zone=\"CableOperators\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_total{Zone=\"CableOperators\"}",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "B"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_completed_on_time{Zone=\"IPOperators\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "C"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_total{Zone=\"IPOperators\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "D"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "CableOperators+ IPOperators-KPI-Jira",
+        "transform": "table",
+        "transformations": [
+          {
+            "id": "concatenate",
+            "options": {}
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Month 1": false,
+                "Month 2": true,
+                "Month 3": true,
+                "Month 4": true,
+                "Priority 2": true,
+                "Priority 3": true,
+                "Priority 4": true,
+                "Value #A": false,
+                "Value #B": false,
+                "Zone 1": true,
+                "Zone 2": true,
+                "Zone 3": true,
+                "Zone 4": true,
+                "__name__ 3": true,
+                "__name__ 4": true,
+                "instance 1": true,
+                "instance 2": true,
+                "instance 3": true,
+                "instance 4": true,
+                "job 1": true,
+                "job 2": true,
+                "job 3": true,
+                "job 4": true
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "число решенных вовремя ",
+              "binary": {
+                "left": "Value #A",
+                "operator": "+",
+                "reducer": "sum",
+                "right": "Value #C"
+              },
+              "mode": "binary",
+              "reduce": {
+                "include": [
+                  "Value #A",
+                  "Value #B"
+                ],
+                "reducer": "sum"
+              },
+              "replaceFields": false
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "общее число",
+              "binary": {
+                "left": "Value #B",
+                "operator": "+",
+                "reducer": "sum",
+                "right": "Value #D"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "процент нарушений",
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "число решенных вовремя ",
+                  "общее число"
+                ],
+                "reducer": "diffperc"
+              },
+              "replaceFields": false
+            }
+          }
+        ],
+        "type": "table-old"
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 42
+        },
+        "id": 52,
+        "panels": [],
+        "title": "Total",
+        "type": "row"
+      },
+      {
+        "columns": [],
+        "datasource": "Prometheus",
+        "description": "",
+        "fontSize": "90%",
+        "gridPos": {
+          "h": 22,
+          "w": 22,
+          "x": 0,
+          "y": 43
+        },
+        "id": 50,
+        "links": [],
+        "pageSize": null,
+        "scroll": true,
+        "showHeader": true,
+        "sort": {
+          "col": null,
+          "desc": false
+        },
+        "styles": [
+          {
+            "$$hashKey": "object:36",
+            "alias": "",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "__name__",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:37",
+            "alias": "NSK ( total)",
+            "align": "",
+            "colorMode": "cell",
+            "colors": [
+              "#FF7383",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "link": false,
+            "mappingType": 1,
+            "pattern": "Value #A",
+            "preserveFormat": false,
+            "sanitize": false,
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:38",
+            "alias": "CableOperators ( total)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#96D98D",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #B",
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:39",
+            "alias": "IPOperators ( total)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#8AB8FF",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #C",
+            "thresholds": [],
+            "type": "string",
+            "unit": "bytes"
+          },
+          {
+            "$$hashKey": "object:40",
+            "alias": "",
+            "align": "auto",
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Time",
+            "thresholds": [],
+            "type": "hidden",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:1177",
+            "alias": "NSK ( completed_on_time)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#FF7383",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #D",
+            "thresholds": [],
+            "type": "string",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:1228",
+            "alias": "CableOperators (completed_on_time)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#96D98D",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #E",
+            "thresholds": [],
+            "type": "string",
+            "unit": "short"
+          },
+          {
+            "$$hashKey": "object:1269",
+            "alias": "IPOperators (completed_on_time)",
+            "align": "auto",
+            "colorMode": "cell",
+            "colors": [
+              "#8AB8FF",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "mappingType": 1,
+            "pattern": "Value #F",
+            "thresholds": [],
+            "type": "string",
+            "unit": "short"
+          }
+        ],
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "tasks_total{Zone=\"НСК\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_total{Zone=\"CableOperators\"}",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "B"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_total{Zone=\"IPOperators\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "C"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_completed_on_time{Zone=\"НСК\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "D"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_completed_on_time{Zone=\"CableOperators\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "E"
+          },
+          {
+            "exemplar": true,
+            "expr": "tasks_completed_on_time{Zone=\"IPOperators\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "F"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Total-KPI-Jira",
+        "transform": "table",
+        "transformations": [
+          {
+            "id": "concatenate",
+            "options": {
+              "frameNameLabel": "frame",
+              "frameNameMode": "field"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Month 1": false,
+                "Month 2": true,
+                "Month 3": true,
+                "Month 4": true,
+                "Month 5": true,
+                "Month 6": true,
+                "Priority 1": false,
+                "Priority 2": true,
+                "Priority 3": true,
+                "Priority 4": true,
+                "Priority 5": true,
+                "Priority 6": true,
+                "Time": true,
+                "Value #E": false,
+                "Zone 1": true,
+                "Zone 2": true,
+                "Zone 3": true,
+                "Zone 4": true,
+                "Zone 5": true,
+                "Zone 6": true,
+                "__name__ 1": true,
+                "__name__ 2": true,
+                "__name__ 3": true,
+                "__name__ 4": true,
+                "__name__ 5": true,
+                "__name__ 6": true,
+                "instance 1": true,
+                "instance 2": true,
+                "instance 3": true,
+                "instance 4": true,
+                "instance 5": true,
+                "instance 6": true,
+                "job 1": true,
+                "job 2": true,
+                "job 3": true,
+                "job 4": true,
+                "job 5": true,
+                "job 6": true
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "число решенных вовремя ( All)",
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Value #D",
+                  "Value #E",
+                  "Value #F"
+                ],
+                "reducer": "sum"
+              },
+              "replaceFields": false
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "общее число ( All)",
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [],
+                "reducer": "sum"
+              },
+              "replaceFields": false
+            }
+          }
+        ],
+        "type": "table-old"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 32,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "default",
+            "value": "default"
+          },
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "datasource",
+          "multi": false,
+          "name": "DS_PROMETHEUS",
+          "options": [],
+          "query": "prometheus",
+          "queryValue": "",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "type": "datasource"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "KPI-Jira",
+    "uid": "Ss3q6hSZksfe",
+    "version": 57
+  }

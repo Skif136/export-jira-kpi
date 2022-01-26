@@ -1,0 +1,12 @@
+# Static
+addr='https://jira.gs-labs.tv'
+token_user='NzQ3NjAyMzQzMTUyOnA/ZTS5nkQXjMNVpSPvVojoWEc8'
+priority= ' AND priority ='
+in_time= ' AND "Reacted in time" = Yes'
+zone = ' AND "Actual for Customers" ='
+one_month= 'project = "Customer Requirements Tracking" AND Created >= startOfMonth(-1) AND Created <= endOfMonth(-1) '
+two_months= 'project = "Customer Requirements Tracking" AND Created >= startOfMonth(-2) AND Created <= endOfMonth(-2) '
+three_months= 'project = "Customer Requirements Tracking" AND Created >= startOfMonth(-3) AND Created <= endOfMonth(-3) '
+four_months= 'project = "Customer Requirements Tracking" AND Created >= startOfMonth(-4) AND Created <= endOfMonth(-4) '
+five_months= 'project = "Customer Requirements Tracking" AND Created >= startOfMonth(-5) AND Created <= endOfMonth(-5) '
+six_months= 'project = "Customer Requirements Tracking" AND Created >= startOfMonth(-6) AND Created <= endOfMonth(-6) '
